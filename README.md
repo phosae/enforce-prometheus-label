@@ -26,14 +26,9 @@ container_cpu_usage_seconds_total{app="",namespace="kube-system",container=~".*a
 container_cpu_usage_seconds_total{namespace="kube-system",container=~".*apiserver.*"}[5m]
 
 --- output
- |---- MatrixSelector :: container_cpu_usage_seconds_total{app="restricted_app",container=~".*apiserver.*",namespace="kube-system"}[5m]
-validate output: <nil>
-
- |---- VectorSelector :: container_cpu_usage_seconds_total{app="",container=~".*apiserver.*",namespace="kube-system"}
-validate output: <nil>
-
- |---- MatrixSelector :: container_cpu_usage_seconds_total{container=~".*apiserver.*",namespace="kube-system"}[5m]
-validate output: label app must be specified
+ |---- MatrixSelector :: container_cpu_usage_seconds_total{app="app",container=~".*apiserver.*",namespace="kube-system",region="cn"}[5m]
+ |---- VectorSelector :: container_cpu_usage_seconds_total{app="app",container=~".*apiserver.*",namespace="kube-system",region="cn"}
+ |---- MatrixSelector :: container_cpu_usage_seconds_total{app="app",container=~".*apiserver.*",namespace="kube-system",region="cn"}[5m]
 ```
 
 ### enforce label pairs to metrics
@@ -49,14 +44,14 @@ region="cn"
 ---input
 # HELP promhttp_metric_handler_requests_total Total number of scrapes by HTTP status code.
 # TYPE promhttp_metric_handler_requests_total counter
-promhttp_metric_handler_requests_total{code="200"} 0
-promhttp_metric_handler_requests_total{code="500"} 0
-promhttp_metric_handler_requests_total{code="503"} 0
+promhttp_metric_handler_requests_total{code="200"} 1000
+promhttp_metric_handler_requests_total{code="500"} 2
+promhttp_metric_handler_requests_total{code="503"} 1
 
 ---output
 # HELP promhttp_metric_handler_requests_total Total number of scrapes by HTTP status code.
 # TYPE promhttp_metric_handler_requests_total counter
-promhttp_metric_handler_requests_total{code="200",app="app",region="cn"} 0
-promhttp_metric_handler_requests_total{code="500",app="app",region="cn"} 0
-promhttp_metric_handler_requests_total{code="503",app="app",region="cn"} 0
+promhttp_metric_handler_requests_total{code="200",app="app",region="cn"} 1000
+promhttp_metric_handler_requests_total{code="500",app="app",region="cn"} 2
+promhttp_metric_handler_requests_total{code="503",app="app",region="cn"} 1
 ```

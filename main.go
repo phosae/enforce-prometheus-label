@@ -26,9 +26,9 @@ var (
 	inputMetrics string = `
 # HELP promhttp_metric_handler_requests_total Total number of scrapes by HTTP status code.
 # TYPE promhttp_metric_handler_requests_total counter
-promhttp_metric_handler_requests_total{code="200"} 0
-promhttp_metric_handler_requests_total{code="500"} 0
-promhttp_metric_handler_requests_total{code="503"} 0
+promhttp_metric_handler_requests_total{code="200"} 1000
+promhttp_metric_handler_requests_total{code="500"} 2
+promhttp_metric_handler_requests_total{code="503"} 1
 `
 )
 
